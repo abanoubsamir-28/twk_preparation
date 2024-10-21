@@ -21,6 +21,7 @@
   line-height: 30px;
   color: var(--white);
   cursor: pointer;
+  
 }
 .form_stepper__info {
     text-transform: uppercase;
@@ -29,12 +30,15 @@
     color: var(--cool-gray);
     margin-bottom: 5px ;
     font-size: 13px;
+    font-family: 'font-medium';
 } 
 .form_stepper__info p:last-child {
     color: var(--white);
+    font-family: 'font-bold';
+    font-size: .8rem;
 } 
 .form_stepper.active .form_stepper__step {
   background-color: var(--light-blue);
   color: black;
-  border: none;
+  border: 1px solid none;
 }
