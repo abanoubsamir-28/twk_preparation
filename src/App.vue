@@ -1,34 +1,79 @@
 <script>
-import { FormWizard, TabContent } from "vue3-form-wizard";
-import "vue3-form-wizard/dist/style.css";
+import "./assets/styles/stepper-form.css";
+import Stepper from "./components/Stepper.vue";
 export default {
   components: {
-    FormWizard,
-    TabContent,
+    Stepper,
+  },
+  data() {
+    return {
+      formStepperMeta: new Map([
+        [
+          1,
+          {
+            index: 1,
+            subTitle: "step 1",
+            mainTitle: "your info",
+            isActive: false,
+          },
+        ],
+        [
+          2,
+          {
+            index: 2,
+            subTitle: "step 2",
+            mainTitle: "select plan",
+            isActive: false,
+          },
+        ],
+        [
+          3,
+          {
+            index: 3,
+            subTitle: "step 3",
+            mainTitle: "add-ons",
+            isActive: false,
+          },
+        ],
+        [
+          4,
+          {
+            index: 4,
+            subTitle: "step 4",
+            mainTitle: "summary",
+            isActive: false,
+          },
+        ],
+      ]),
+      activeStep: null,
+    };
+  },
+  computed: {
+    stepperEntries() {
+      return Array.from(this.formStepperMeta.values());
+    },
+  },
+  methods: {
+    handleStepChange(index) {
+      this.formStepperMeta.get(this.activeStep).isActive = false;
+      this.formStepperMeta.get(index).isActive = true;
+      this.activeStep = index;
+    },
+  },
+  mounted() {
+    this.activeStep = 1;
+    this.formStepperMeta.get(1).isActive = true;
   },
 };
 </script>
 
 <template>
-  <form-wizard>
-    <tab-content title="step1">
-      Hello
-    </tab-content>
-    <tab-content title="step1">
-      Hello
-    </tab-content>
-    <tab-content title="step1">
-      Hello
-    </tab-content>
-    <tab-content title="step1">
-      Hello
-    </tab-content>
-    <tab-content title="step1">
-      Hello
-    </tab-content>
-  </form-wizard>
+  <div class="step_form__navigation">
+    <stepper
+      @step-clicked="handleStepChange"
+      v-for="item in stepperEntries"
+      :step="item"
+      :key="item.index"
+    ></stepper>
+  </div>
 </template>
-
-<style scoped>
-
-</style>

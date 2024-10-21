@@ -1,0 +1,40 @@
+.step_form__navigation {
+  background-image: url("../images/bg-sidebar-desktop.svg");
+  background-repeat: no-repeat;
+  height: 80vh;
+  background-size: contain;
+  display: flex;
+  flex-direction: column;
+}
+.form_stepper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 2rem;
+}
+.form_stepper__step {
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--white);
+  border-radius: 50%;
+  text-align: center;
+  line-height: 30px;
+  color: var(--white);
+  cursor: pointer;
+}
+.form_stepper__info {
+    text-transform: uppercase;
+}
+.form_stepper__info p:first-child {
+    color: var(--cool-gray);
+    margin-bottom: 5px ;
+    font-size: 13px;
+} 
+.form_stepper__info p:last-child {
+    color: var(--white);
+} 
+.form_stepper.active .form_stepper__step {
+  background-color: var(--light-blue);
+  color: black;
+  border: none;
+}
