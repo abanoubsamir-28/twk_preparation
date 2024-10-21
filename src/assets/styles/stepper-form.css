@@ -1,3 +1,8 @@
+.stepper_form {
+  width: 60vw;
+  height: 80vh;
+  background-color: var(--white);
+}
 .step_form__navigation {
   background-image: url("../images/bg-sidebar-desktop.svg");
   background-repeat: no-repeat;

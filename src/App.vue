@@ -54,6 +54,10 @@ export default {
     },
   },
   methods: {
+    resetFormStepper() {
+      this.activeStep = 1;
+      this.formStepperMeta.get(1).isActive = true;
+    },
     handleStepChange(index) {
       this.formStepperMeta.get(this.activeStep).isActive = false;
       this.formStepperMeta.get(index).isActive = true;
@@ -61,19 +65,20 @@ export default {
     },
   },
   mounted() {
-    this.activeStep = 1;
-    this.formStepperMeta.get(1).isActive = true;
+    this.resetFormStepper();
   },
 };
 </script>
 
 <template>
-  <div class="step_form__navigation">
-    <stepper
-      @step-clicked="handleStepChange"
-      v-for="item in stepperEntries"
-      :step="item"
-      :key="item.index"
-    ></stepper>
+  <div class="stepper_form">
+    <div class="step_form__navigation">
+      <stepper
+        @step-clicked="handleStepChange"
+        v-for="item in stepperEntries"
+        :step="item"
+        :key="item.index"
+      ></stepper>
+    </div>
   </div>
 </template>
