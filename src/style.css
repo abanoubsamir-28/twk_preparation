@@ -1,5 +1,6 @@
-@import url("./assets/styles/fonts.css");
 @import url("./assets/styles/reset.css");
+@import url("./assets/styles/fonts.css");
+@import url("./assets/styles/form-view.css");
 
 :root {
   --marine-blue: #1a2e4d;
@@ -24,3 +25,4 @@ body {
   height: 100vh;
   background-color: var(--magnolia);
 }
+
