@@ -113,9 +113,9 @@ export default {
   beforeMount() {
     this.resetFormStepper();
   },
-  mounted () {
+  mounted() {
     console.log(this.$v);
-  }
+  },
 };
 </script>
 
@@ -132,11 +132,11 @@ export default {
     <keep-alive>
       <div class="stepper_form--form_view">
         <component
-          :model="$v.stepForm"
+          :v="$v"
+          :formModel="stepForm"
           :is="formStepperMeta.get(activeStep).formView"
         ></component>
       </div>
     </keep-alive>
-    <!-- <h1>{{$v.stepForm.s1.name.value}}</h1> -->
   </div>
 </template>

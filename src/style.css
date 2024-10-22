@@ -16,13 +16,12 @@
   --white: #ffffff;
 }
 
-
 body {
-  font-family: "font-medium", sans-serif;
+  font-family: "Ubuntu", sans-serif;
+
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   background-color: var(--magnolia);
 }
-
