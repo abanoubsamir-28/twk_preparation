@@ -4,6 +4,7 @@ import BaseInput from "../UI/BaseInput.vue";
 import arcadeIcon from "../../../assets/images/icon-arcade.svg";
 import advancedIcon from "../../../assets/images/icon-advanced.svg";
 import proIcon from "../../../assets/images/icon-pro.svg";
+
 export default {
   components: { FormHeader, BaseInput },
   props: ["v", "formModel"],
@@ -15,9 +16,9 @@ export default {
           {
             title: "arcade",
             iconPath: arcadeIcon,
-            monthlyFees: "9",
+            monthlyFees: 9,
             isActive: false,
-            yearlyFees: "90",
+            yearlyFees: 90,
           },
         ],
         [
@@ -25,9 +26,9 @@ export default {
           {
             title: "advanced",
             iconPath: advancedIcon,
-            monthlyFees: "12",
+            monthlyFees: 12,
             isActive: false,
-            yearlyFees: "120",
+            yearlyFees: 120,
           },
         ],
         [
@@ -35,25 +36,30 @@ export default {
           {
             title: "pro",
             iconPath: proIcon,
-            monthlyFees: "15",
+            monthlyFees: 15,
             isActive: false,
-            yearlyFees: "150",
+            yearlyFees: 150,
           },
         ],
       ]),
       activeCard: null,
+      switchValue: false,
     };
   },
   computed: {
     cards() {
       return Array.from(this.cardsConfig.values());
     },
+    currentPlanType () {
+      return this.formModel.s2.subscriptionModel
+    }
   },
   methods: {
     handleCardChange(cardKey) {
-      this.cardsConfig.get(this.activeCard).isActive = false
-      this.activeCard = cardKey;
-      this.cardsConfig.get(cardKey).isActive = true;
+      this.cardsConfig.get(this.activeCard).isActive = false;
+      this.activeCard = cardKey.title;
+      this.cardsConfig.get(cardKey.title).isActive = true;
+      this.formModel.s2.plan = cardKey;
     },
   },
   mounted() {
@@ -70,23 +76,39 @@ export default {
   ></form-header>
   <div class="cards">
     <div
-      @click="handleCardChange(card.title)"
+      @click="handleCardChange(card)"
       v-for="card of cards"
       :key="card.title"
       class="card"
       :class="{ active: card.isActive }"
     >
-      <img :src="card.iconPath" alt="" />
+      <img :src="card.iconPath" alt="" width="30" height="30"/>
       <div class="card_content">
         <h5>{{ card.title }}</h5>
-        <p class="card-fees">${{ card.yearlyFees }}/yr</p>
-        <p class="card-offer">2 months free</p>
+        <p v-if="currentPlanType" class="card-fees">${{ card.yearlyFees }}/yr</p>
+        <p v-else class="card-fees">${{ card.monthlyFees }}/m</p>
+        <p v-if="currentPlanType" class="card-offer">2 months free</p>
       </div>
+    </div>
+  </div>
+  <div class="fees_type">
+    <div class="fees_type--container">
+      <p>Monthly</p>
+      <b-form-checkbox
+        v-model="formModel.s2.subscriptionModel"
+        name="check-button"
+        switch
+      >
+      </b-form-checkbox>
+      <p>yearly</p>
     </div>
   </div>
 </template>
 
 <style scoped>
+h1 {
+  color: red;
+}
 .cards {
   display: flex;
   gap: 1rem;
@@ -96,6 +118,8 @@ export default {
   border: 1px solid #e3e8ef;
   border-radius: 12px;
   cursor: pointer;
+  width: 120px;
+
 }
 img {
   margin-bottom: 1.6rem;
@@ -120,7 +144,22 @@ h5 {
   font-weight: 500;
 }
 .active {
-  border:1px solid #7f3f8c ; 
+  border: 1px solid #7f3f8c;
   background: #f4fbfe;
+}
+.fees_type {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  text-transform: capitalize;
+  font-weight: bold;
+  background: #f4fbfe;
+  padding: 5px 0;
+}
+.fees_type--container {
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 </style>

@@ -1,10 +1,8 @@
 <script>
-
 export default {
-
+    props:['currentStep']
 };
 </script>
 
 <template>
-    <h1>add ons Info</h1>
 </template>

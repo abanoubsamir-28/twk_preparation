@@ -25,3 +25,10 @@ body {
   height: 100vh;
   background-color: var(--magnolia);
 }
+
+/* Bootstrap  */
+.form-check-input {
+  background-color: #1a2e4d !important;
+  background-image: url("./assets/images/switch.svg") !important;
+  cursor: pointer;
+}

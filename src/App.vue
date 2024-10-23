@@ -7,6 +7,7 @@ import subscriptionModelVue from "./components/forms/views/subscriptionModel.vue
 import AddOnsVue from "./components/forms/views/AddOns.vue";
 import SummaryVue from "./components/forms/views/Summary.vue";
 import { email, minLength, required } from "@vuelidate/validators";
+import Controllers from "./components/Controllers.vue";
 export default {
   setup() {
     return { $v: useVuelidate() };
@@ -14,6 +15,7 @@ export default {
 
   components: {
     Stepper,
+    Controllers,
   },
   data() {
     return {
@@ -68,7 +70,7 @@ export default {
         },
         s2: {
           plan: null,
-          subscriptionModel: 1,
+          subscriptionModel: false,
         },
         s3: {
           addOns: [],
@@ -113,9 +115,6 @@ export default {
   beforeMount() {
     this.resetFormStepper();
   },
-  mounted() {
-    console.log(this.$v);
-  },
 };
 </script>
 
@@ -129,14 +128,18 @@ export default {
         :key="item.index"
       ></stepper>
     </div>
-    <keep-alive>
-      <div class="stepper_form--form_view">
-        <component
-          :v="$v"
-          :formModel="stepForm"
-          :is="formStepperMeta.get(activeStep).formView"
-        ></component>
-      </div>
-    </keep-alive>
+    <div>
+      <keep-alive>
+        <div class="stepper_form--form_view">
+          <component
+            :v="$v"
+            :formModel="stepForm"
+            :is="formStepperMeta.get(activeStep).formView"
+          ></component>
+        </div>
+      </keep-alive>
+      <controllers></controllers>
+
+    </div>
   </div>
 </template>
