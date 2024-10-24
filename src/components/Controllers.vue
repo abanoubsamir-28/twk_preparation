@@ -83,7 +83,7 @@ export default {
   color: #174a8b;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1280px) {
   .controllers {
     position: absolute;
     bottom: 1rem;

@@ -169,7 +169,7 @@ h5 {
   gap: 10px;
   align-items: center;
 }
-@media (max-width: 767px) {
+@media (max-width: 1280px) {
   .cards{
     flex-direction: column;
   }
