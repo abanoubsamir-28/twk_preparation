@@ -32,3 +32,10 @@ body {
   background-image: url("./assets/images/switch.svg") !important;
   cursor: pointer;
 }
+
+@media (max-width: 767px) {
+  body {
+    height: unset;
+    overflow: hidden;
+  }
+}

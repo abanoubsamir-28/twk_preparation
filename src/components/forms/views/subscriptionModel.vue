@@ -63,8 +63,15 @@ export default {
     },
   },
   mounted() {
-    this.activeCard = "pro";
-    this.cardsConfig.get("pro").isActive = true;
+    console.log(this.formModel);
+    if(!this.formModel.s2.plan) {
+      this.activeCard = "pro";
+      this.cardsConfig.get("pro").isActive = true;
+    } else {
+      console.log("Done");
+      this.activeCard = this.formModel.s2.plan.title;
+      this.cardsConfig.get(this.formModel.s2.plan.title).isActive = true;
+    }
   },
 };
 </script>
@@ -162,4 +169,23 @@ h5 {
   gap: 10px;
   align-items: center;
 }
+@media (max-width: 767px) {
+  .cards{
+    flex-direction: column;
+  }
+  .card {
+    display: flex;
+    width: 99%;
+    flex-direction: row;
+    gap: 1rem;
+    height: fit-content;
+    padding: .4rem 0.5rem;
+    margin: auto;
+    align-items: center;
+  }
+  .card img {
+    margin: unset;
+  }
+}
+
 </style>

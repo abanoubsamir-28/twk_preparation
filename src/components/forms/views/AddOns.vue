@@ -123,4 +123,10 @@ export default {
   color: #1a2e4d;
   font-weight: bold;
 }
+
+@media (max-width: 767px) {
+  .main_content {
+    text-wrap: wrap;
+  }
+}
 </style>

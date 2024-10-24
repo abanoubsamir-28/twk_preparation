@@ -1,6 +1,5 @@
 .stepper_form {
   width: 60vw;
-  height: 80vh;
   background-color: var(--white);
   display: flex;
   padding: 1rem;
@@ -30,21 +29,20 @@
   line-height: 30px;
   color: var(--white);
   cursor: pointer;
-  
 }
 .form_stepper__info {
-    text-transform: uppercase;
+  text-transform: uppercase;
 }
 .form_stepper__info p:first-child {
-    color: var(--cool-gray);
-    margin-bottom: 5px ;
-    font-size: 13px;
-} 
+  color: var(--cool-gray);
+  margin-bottom: 5px;
+  font-size: 13px;
+}
 .form_stepper__info p:last-child {
-    color: var(--white);
-    font-size: .8rem;
-    text-wrap: nowrap;
-} 
+  color: var(--white);
+  font-size: 0.8rem;
+  text-wrap: nowrap;
+}
 .form_stepper.active .form_stepper__step {
   background-color: var(--light-blue);
   color: black;
@@ -52,4 +50,38 @@
 }
 .stepper_form--form_view {
   padding: 2rem;
+}
+
+@media (max-width: 767px) {
+  .stepper_form {
+    flex-direction: column;
+    background-image: url("../images/bg-sidebar-mobile.svg");
+    background-repeat: no-repeat;
+    width: unset;
+    padding: unset;
+  }
+  .step_form__navigation {
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    background: none;
+    height: auto;
+    padding: 1rem;
+    width: 54%;
+    margin: auto;
+  }
+  .form_stepper__info {
+    display: none;
+  }
+  .form_stepper {
+    gap: unset;
+    padding: unset;
+  }
+  .stepper_form--form_view {
+    width: 80%;
+    margin: 1rem auto;
+    background: white;
+    padding: 1rem;
+    border-radius: 12px;
+  }
 }

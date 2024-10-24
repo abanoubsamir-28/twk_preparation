@@ -8,6 +8,8 @@ import AddOnsVue from "./components/forms/views/AddOns.vue";
 import SummaryVue from "./components/forms/views/Summary.vue";
 import { email, minLength, required } from "@vuelidate/validators";
 import Controllers from "./components/Controllers.vue";
+import Thankyou from './components/forms/views/Thankyou.vue';
+
 export default {
   setup() {
     return { $v: useVuelidate() };
@@ -16,9 +18,11 @@ export default {
   components: {
     Stepper,
     Controllers,
+    Thankyou
   },
   data() {
     return {
+      userCheckedOut : false , 
       formStepperMeta: new Map([
         [
           1,
@@ -28,6 +32,8 @@ export default {
             mainTitle: "your info",
             isActive: false,
             formView: PersonalInfoVue,
+            formKey: "s1",
+            isNext: true,
           },
         ],
         [
@@ -38,6 +44,10 @@ export default {
             mainTitle: "select plan",
             isActive: false,
             formView: subscriptionModelVue,
+            formKey: "s2",
+            isNext: true,
+            isBack: true,
+            prevFormKey :'s1'
           },
         ],
         [
@@ -48,6 +58,11 @@ export default {
             mainTitle: "add-ons",
             isActive: false,
             formView: AddOnsVue,
+            formKey: "s3",
+            isNext: true,
+            isBack: true,
+            prevFormKey :'s2'
+
           },
         ],
         [
@@ -58,6 +73,11 @@ export default {
             mainTitle: "summary",
             isActive: false,
             formView: SummaryVue,
+            formKey: "s4",
+            canSubmit: true,
+            isBack: true,
+            prevFormKey :'s3'
+
           },
         ],
       ]),
@@ -84,6 +104,12 @@ export default {
     },
   },
   methods: {
+    toTheNextStep() {
+      this.handleStepChange(this.activeStep + 1);
+    },
+    toTheBackStep() {
+      this.handleStepChange(this.activeStep - 1);
+    },
     resetFormStepper() {
       this.activeStep = 1;
       this.formStepperMeta.get(1).isActive = true;
@@ -93,6 +119,9 @@ export default {
       this.formStepperMeta.get(index).isActive = true;
       this.activeStep = index;
     },
+    submit() {
+      this.userCheckedOut = !this.userCheckedOut
+    }
   },
   validations() {
     return {
@@ -126,9 +155,10 @@ export default {
         v-for="item in stepperEntries"
         :step="item"
         :key="item.index"
+        :v="$v"
       ></stepper>
     </div>
-    <div>
+    <div v-if="!userCheckedOut">
       <keep-alive>
         <div class="stepper_form--form_view">
           <component
@@ -138,8 +168,14 @@ export default {
           ></component>
         </div>
       </keep-alive>
-      <controllers></controllers>
-
+      <controllers
+        :v="$v"
+        @next-step="toTheNextStep"
+        @back-step="toTheBackStep"
+        @submit="submit"
+        :currentStep="formStepperMeta.get(activeStep)"
+      ></controllers>
     </div>
+    <thankyou v-else></thankyou>
   </div>
 </template>
